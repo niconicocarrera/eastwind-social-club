@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>East Wind Social Club</title>
+  <meta name="description" content="East Wind Social Club — a music venue and social club highlighting Latino-Black Chicago talent and local music traditions. Aurora, Illinois.">
+  <meta property="og:title" content="East Wind Social Club">
+  <meta property="og:description" content="A music venue and social club highlighting Latino-Black Chicago talent. Aurora, Illinois.">
+  <meta property="og:image" content="assets/luis.webp">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://eastwind-social-club.netlify.app">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/TAYLennonRegular.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Pool photo: full bleed -->
+  <div class="pool-banner">
+    <img src="assets/pool.webp" alt="" aria-hidden="true">
+  </div>
+
+  <main class="site-body">
+
+  <!-- Logo straddling the pool/red break -->
+  <section class="hero">
+    <img src="assets/logo.svg" alt="East Wind Social Club" class="logo">
+  </section>
+
+  <!-- About -->
+  <section class="about fade-in">
+    <div class="about-inner">
+      <div class="about-photo">
+        <img src="assets/luis.webp" alt="East Wind Social Club" loading="lazy">
+        <div class="about-overlay">
+          <h2 class="section-title">ABOUT US</h2>
+          <img src="assets/stars.svg" alt="" class="stars" aria-hidden="true">
+        </div>
+      </div>
+      <div class="about-body">
+        <p>East Wind is a music venue and social club that highlights local talent, with an emphasis on Latino-Black Chicago and local music traditions.</p>
+        <p>East Wind is a love letter to immigrant communities, especially to people who don't always feel like they belong in traditional music spaces. Music gives people a way to express themselves fully, without asking for permission.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events -->
+  <section class="events fade-in">
+    <h2 class="section-title">EVENTS CALENDAR</h2>
+    <img src="assets/stars.svg" alt="" class="stars" aria-hidden="true">
+    <div class="cal-wrap">
+      <div id="calendar"></div>
+    </div>
+  </section>
+
+  <!-- Hours -->
+  <section class="hours fade-in">
+    <h2 class="section-title">WEEKLY VIBE &amp; HOURS</h2>
+    <img src="assets/stars.svg" alt="" class="stars" aria-hidden="true">
+
+    <div class="hours-grid">
+
+      <div class="hours-day hours-day--left">
+        <h3 class="hours-day-name">THURSDAY</h3>
+        <p class="hours-time">6:00PM – 11:00PM</p>
+        <p class="hours-detail">LIVE JAZZ – JAM 1ST &amp; 3RD</p>
+        <p class="hours-detail">HAPPY HOUR 6–8P</p>
+        <p class="hours-detail">$7 DRINKS</p>
+      </div>
+
+      <div class="hours-day hours-day--right">
+        <h3 class="hours-day-name">FRIDAY</h3>
+        <p class="hours-time">6:00PM – 1:00AM</p>
+        <p class="hours-detail">LIVE MUSIC / CURATED DJ SETS</p>
+        <p class="hours-detail">HAPPY HOUR 6–8P</p>
+        <p class="hours-detail">$8 HIGH BALLS</p>
+        <p class="hours-detail">$5 SHOTS</p>
+      </div>
+
+      <div class="hours-day hours-day--left">
+        <h3 class="hours-day-name">SATURDAY</h3>
+        <p class="hours-time">6:00PM – 1:00AM</p>
+        <p class="hours-detail">LIVE DJS SETS</p>
+        <p class="hours-detail">HAPPY HOUR 6–8P</p>
+        <p class="hours-detail">2 FOR $12 MONACOS</p>
+        <p class="hours-detail">$4 BUZZBALLS</p>
+      </div>
+
+      <div class="hours-day hours-day--right">
+        <h3 class="hours-day-name">SUNDAY</h3>
+        <p class="hours-time">9:00PM – 11:00PM</p>
+        <p class="hours-detail">SELECTIVE LISTENING / BYO</p>
+        <p class="hours-detail">FREE PLAY BILLIARDS</p>
+        <p class="hours-detail">HAPPY HOUR 6–9P</p>
+        <p class="hours-detail">$7 DRINKS</p>
+        <p class="hours-detail">$3 DOMESTIC BEER ALL NIGHT</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact fade-in">
+    <h2 class="section-title">CONTACT US</h2>
+    <a class="handle" href="https://linktr.ee/eastwindclub" target="_blank" rel="noopener noreferrer">@EASTWIND.CLUB</a>
+  </section>
+
+  </main>
+
+  <script src="events.js"></script>
+  <script src="calendar.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
