@@ -12,8 +12,8 @@ class EastWindCalendar {
   async loadEvents() {
     const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
     const url = isLocal
-      ? 'https://eastwind-social-club.netlify.app/.netlify/functions/events'
-      : '/.netlify/functions/events';
+      ? 'https://eastwind-social-club.pages.dev/events'
+      : '/events';
     try {
       const res = await fetch(url);
       if (!res.ok) throw new Error('fetch failed');
