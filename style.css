@@ -252,6 +252,7 @@ body {
   background: var(--cal-cream);
   min-height: clamp(56px, 12vw, 80px);
   padding: 0.25rem 0.3rem;
+  position: relative;
 }
 
 .cal-cell--empty { background: var(--cal-empty); }
@@ -286,6 +287,81 @@ body {
   text-align: left;
   margin-bottom: 0.15rem;
   clear: both;
+  cursor: pointer;
+}
+
+.cal-event:hover .cal-event-name {
+  opacity: 0.7;
+}
+
+/* Event detail panel */
+.cal-event-panel {
+  position: absolute;
+  z-index: 20;
+  top: 100%;
+  left: 0;
+  min-width: 130px;
+  max-width: 190px;
+  background: var(--cal-dark);
+  border: 1px solid var(--gold-dim);
+  padding: 0.6rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cal-event-panel--flip {
+  left: auto;
+  right: 0;
+}
+
+.cal-panel-name {
+  font-family: 'TAYLennon', serif;
+  font-size: clamp(0.65rem, 2.2vw, 0.85rem);
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.cal-panel-time {
+  font-family: var(--cal-mono);
+  font-size: clamp(0.46rem, 1.3vw, 0.54rem);
+  color: var(--gold);
+  opacity: 0.65;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.cal-panel-btn {
+  display: block;
+  margin-top: 0.35rem;
+  font-family: var(--cal-mono);
+  font-size: clamp(0.44rem, 1.2vw, 0.52rem);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cal-dark);
+  background: var(--gold);
+  padding: 0.3rem 0.4rem;
+  text-align: center;
+  text-decoration: none;
+  transition: opacity 150ms ease;
+}
+
+.cal-panel-btn:hover {
+  opacity: 0.8;
+}
+
+.cal-panel-free {
+  font-family: var(--cal-mono);
+  font-size: clamp(0.44rem, 1.2vw, 0.52rem);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.55;
+  margin-top: 0.2rem;
 }
 
 .cal-event-time,

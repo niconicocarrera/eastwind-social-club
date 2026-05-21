@@ -5,6 +5,7 @@ class EastWindCalendar {
     this.current   = new Date(this.today.getFullYear(), this.today.getMonth(), 1);
     this.events    = [];
     this.loading   = true;
+    this._docListener = null;
     this.render();
     this.loadEvents();
   }
@@ -34,8 +35,55 @@ class EastWindCalendar {
   }
 
   navigate(dir) {
+    this.closePanel();
     this.current = new Date(this.current.getFullYear(), this.current.getMonth() + dir, 1);
     this.render();
+  }
+
+  togglePanel(eventEl, idx) {
+    const existing = this.container.querySelector('.cal-event-panel');
+    if (existing) {
+      const existingIdx = +existing.dataset.for;
+      this.closePanel();
+      if (existingIdx === idx) return;
+    }
+    this.openPanel(eventEl, idx);
+  }
+
+  openPanel(eventEl, idx) {
+    const event = this.events[idx];
+    if (!event) return;
+
+    const cell = eventEl.closest('.cal-cell');
+
+    const panel = document.createElement('div');
+    panel.className = 'cal-event-panel';
+    panel.dataset.for = idx;
+
+    // Flip panel left if cell is in the right half of the calendar
+    const cellRect = cell.getBoundingClientRect();
+    const calRect  = this.container.getBoundingClientRect();
+    if (cellRect.left > calRect.left + calRect.width / 2) {
+      panel.classList.add('cal-event-panel--flip');
+    }
+
+    panel.innerHTML = `
+      <p class="cal-panel-name">${event.name}</p>
+      ${event.time ? `<p class="cal-panel-time">${event.time}</p>` : ''}
+      ${event.url
+        ? `<a class="cal-panel-btn" href="${event.url}" target="_blank" rel="noopener noreferrer">GET TICKETS</a>`
+        : `<p class="cal-panel-free">FREE ENTRY</p>`}
+    `;
+
+    cell.appendChild(panel);
+    eventEl.setAttribute('aria-expanded', 'true');
+  }
+
+  closePanel() {
+    const panel = this.container.querySelector('.cal-event-panel');
+    if (panel) panel.remove();
+    this.container.querySelectorAll('[aria-expanded="true"]')
+      .forEach(el => el.setAttribute('aria-expanded', 'false'));
   }
 
   render() {
@@ -67,17 +115,20 @@ class EastWindCalendar {
     }
 
     for (let day = 1; day <= daysInMonth; day++) {
-      const ds     = this.dateStr(year, month, day);
-      const evts   = this.eventsFor(ds);
+      const ds      = this.dateStr(year, month, day);
+      const evts    = this.eventsFor(ds);
       const isToday = ds === todayStr;
 
       html += `<div class="cal-cell${isToday ? ' cal-cell--today' : ''}">
         <span class="cal-day-num">${day}</span>
-        ${this.loading ? '' : evts.map(e => `
-          <div class="cal-event">
-            ${e.time ? `<span class="cal-event-time">${e.time} —</span>` : ''}
-            <span class="cal-event-name">${e.name}</span>
-          </div>`).join('')}
+        ${this.loading ? '' : evts.map(e => {
+          const idx = this.events.indexOf(e);
+          return `
+            <div class="cal-event" data-idx="${idx}" role="button" tabindex="0" aria-expanded="false">
+              ${e.time ? `<span class="cal-event-time">${e.time}</span>` : ''}
+              <span class="cal-event-name">${e.name}</span>
+            </div>`;
+        }).join('')}
       </div>`;
     }
 
@@ -86,9 +137,31 @@ class EastWindCalendar {
 
     this.container.innerHTML = html;
 
+    // Nav buttons
     this.container.querySelectorAll('.cal-nav').forEach(btn => {
       btn.addEventListener('click', () => this.navigate(+btn.dataset.dir));
     });
+
+    // Event click — open panel
+    this.container.querySelectorAll('.cal-event').forEach(el => {
+      el.addEventListener('click', e => {
+        e.stopPropagation();
+        this.togglePanel(el, +el.dataset.idx);
+      });
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.togglePanel(el, +el.dataset.idx);
+        }
+      });
+    });
+
+    // Close panel on outside click
+    if (this._docListener) document.removeEventListener('click', this._docListener);
+    this._docListener = e => {
+      if (!this.container.contains(e.target)) this.closePanel();
+    };
+    document.addEventListener('click', this._docListener);
   }
 }
 
