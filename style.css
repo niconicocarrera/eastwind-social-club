@@ -60,6 +60,7 @@ body {
 }
 
 /* ── Main content column — 480px floor, 1/3 viewport on wide screens ── */
+
 .site-body {
   max-width: max(480px, 33.33vw);
   margin: 0 auto;
