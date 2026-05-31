@@ -154,9 +154,9 @@ body {
   font-size: clamp(1rem, 4.2vw, 1.68rem);
 }
 
-/* Hours title 30% smaller than events/contact title */
+/* Hours title matches events/contact title */
 .hours .section-title {
-  font-size: clamp(0.7rem, 2.94vw, 1.18rem);
+  font-size: clamp(1rem, 4.2vw, 1.68rem);
 }
 
 /* ── Events ── */
@@ -352,6 +352,15 @@ body {
 
 .cal-panel-btn:hover {
   opacity: 0.8;
+}
+
+.cal-panel-price {
+  font-family: var(--cal-mono);
+  font-size: clamp(0.44rem, 1.2vw, 0.52rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
 }
 
 .cal-panel-free {

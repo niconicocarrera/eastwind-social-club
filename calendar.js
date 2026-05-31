@@ -70,6 +70,7 @@ class EastWindCalendar {
     panel.innerHTML = `
       <p class="cal-panel-name">${event.name}</p>
       ${event.time ? `<p class="cal-panel-time">${event.time}</p>` : ''}
+      ${event.price ? `<p class="cal-panel-price">${event.price}</p>` : ''}
       ${event.url
         ? `<a class="cal-panel-btn" href="${event.url}" target="_blank" rel="noopener noreferrer">GET TICKETS</a>`
         : `<p class="cal-panel-free">FREE ENTRY</p>`}

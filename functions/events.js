@@ -63,17 +63,22 @@ function parseICal(text) {
       .replace(/\\\\/g, '\\')
       .replace(/\\n/gi, ' ');
 
-    // Parse Eventbrite or other ticket URL from DESCRIPTION field
+    // Parse ticket URL and price from DESCRIPTION field
+    // Gus puts Eventbrite URL and optionally "Price: $15" or "Free" in the description
     let url = null;
+    let price = null;
     if (props.DESCRIPTION) {
       const desc = props.DESCRIPTION
         .replace(/\\n/gi, '\n')
         .replace(/\\,/g, ',');
-      const match = desc.match(/https?:\/\/[^\s\\"<>]+/);
-      if (match) url = match[0];
+      const urlMatch = desc.match(/https?:\/\/[^\s\\"<>]+/);
+      if (urlMatch) url = urlMatch[0];
+      const priceMatch = desc.match(/price:\s*([^\n]+)/i);
+      if (priceMatch) price = priceMatch[1].trim();
+      else if (/free/i.test(desc) && !url) price = 'Free';
     }
 
-    events.push({ date: dt.date, time: dt.time, name, url: url || null });
+    events.push({ date: dt.date, time: dt.time, name, url: url || null, price: price || null });
   }
 
   return events.sort((a, b) => a.date.localeCompare(b.date));
